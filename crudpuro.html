@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Itens</title>
+</head>
+<body>
+
+<script>
+    let opcao;
+    let arranjo = [];
+
+    function menu() {
+        let entrada = prompt(
+            "Escolha uma opção:\n" +
+            "1) Adicionar um item\n" +
+            "2) Exibir todos os itens\n" +
+            "3) Atualizar um item\n" +
+            "4) Remover um item\n" +
+            "5) Sair"
+        );
+
+        if (entrada === null) return 5;
+
+        let numero = Number(entrada);
+
+        if (isNaN(numero)) return -1;
+
+        return numero;
+    }
+
+    function adicionarItem(arranjo) {
+        let item = prompt("Digite o item:");
+
+        if (item === null) return;
+
+        if (item && item.trim() !== "") {
+            arranjo.push(item);
+            alert("Item adicionado com sucesso!");
+        } else {
+            alert("Item inválido!");
+        }
+    }
+
+    function exibirItem(arranjo) {
+        if (arranjo.length === 0) {
+            alert("O arranjo está vazio.");
+        } else {
+            let texto = "Itens cadastrados:\n";
+            arranjo.forEach((item, index) => {
+                texto += `${index + 1} - ${item}\n`;
+            });
+            alert(texto);
+        }
+    }
+
+    function atualizarItem(arranjo) {
+        let entrada = prompt("Digite o número do item que deseja atualizar:");
+
+        if (entrada === null) return;
+
+        let indice = Number(entrada);
+
+        if (isNaN(indice) || indice <= 0 || indice > arranjo.length) {
+            alert("Índice inválido!");
+            return;
+        }
+
+        let novoValor = prompt("Digite o novo item:");
+
+        if (novoValor === null) return;
+
+        if (novoValor && novoValor.trim() !== "") {
+            arranjo[indice - 1] = novoValor;
+            alert("Item atualizado com sucesso!");
+        } else {
+            alert("Valor inválido!");
+        }
+    }
+
+    function removerItem(arranjo) {
+        let entrada = prompt("Digite o número do item que deseja remover:");
+
+        if (entrada === null) return;
+
+        let indice = Number(entrada);
+
+        if (isNaN(indice) || indice <= 0 || indice > arranjo.length) {
+            alert("Índice inválido!");
+            return;
+        }
+
+        arranjo.splice(indice - 1, 1);
+        alert("Item removido com sucesso!");
+    }
+
+    do {
+        opcao = menu();
+
+        if (isNaN(opcao)) {
+            alert("Digite um número válido!");
+            continue;
+        }
+
+        if (opcao === 1) {
+            adicionarItem(arranjo);
+        } 
+        else if (opcao === 2) {
+            exibirItem(arranjo);
+        } 
+        else if (opcao === 3) {
+            atualizarItem(arranjo);
+        } 
+        else if (opcao === 4) {
+            removerItem(arranjo);
+        } 
+        else if (opcao !== 5) {
+            alert("Opção inválida!");
+        }
+
+    } while (opcao !== 5);
+
+    alert("Programa encerrado!");
+</script>
+
+</body>
+</html>
